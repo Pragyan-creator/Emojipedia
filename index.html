@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emojipedia</title>
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="root"></div>
+       
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+        
+
+        
+        <script type="text/babel">
+        const {useState}=React
+        const rootHandle=document.getElementById('root')
+
+          const emojiDictionary={
+            "😀":"GRINNING FACE: A yellow face with simple, open eyes and a broad, open smile, showing upper teeth and tongue on some platforms. Often conveys general pleasure and good cheer or humor.",
+            "😆":"GRINNING SQUINTING FACE: A yellow face with a broad, open smile and scrunched, X-shaped eyes. Often conveys excitement or hearty laughter.",
+            "😅":"GRINNING FACE WITH SWEAT: Intended to depict nerves or discomfort but commonly used to express a close call, as if saying Whew! and wiping sweat from the forehead. ",
+            "🥰":"SMILING FACE WITH HEARTS: A yellow face with smiling eyes, a closed smile, rosy cheeks, and several hearts floating around its head. Expresses a range of happy, affectionate feelings, especially being in love. The number of hearts (three or more) varies by platform.",
+            "🥺":"PLEADING FACE: A yellow face with furrowed eyebrows, a small frown, and large, “puppy dog” eyes, as if begging or pleading. May also represent adoration or feeling touched by a loving gesture.",
+            "🙄":"FACE WITH ROLLING EYES : A yellow face with a small, closed mouth, flat or frowning, rolling its large, white eyes upwards. As with the gesture of an eye-roll, commonly conveys moderate disdain, disapproval, frustration, or boredom. Tone varies, including playful, sassy, resentful, and sarcastic, as if saying Yeah, whatever.",
+            "😤":"FACE WITH STEAM FROM EYES: A yellow face with closed eyes, furrowed eyebrows, broad frown, and two puffs of steam blowing out of its nose, as if in a huff or fuming. May convey various negative emotions, including irritation, anger, and contempt. May also convey feelings of pride, dominance, and empowerment.",
+            "😬":"GRIMACING FACE: A yellow face with simple open eyes showing clenched teeth. May represent a range of negative or tense emotions, especially nervousness, embarrassment, or awkwardness.",
+            "🤥":"LYING FACE: A yellow face with raised eyebrows, enlarged eyes, slight frown, and long nose, indicating it’s telling a lie in the manner of Pinocchio. Like that character, Facebook's design features a wooden nose. May represent lying, a liar, and other concepts of deceit and dishonesty to varying degrees of intensity. Sometimes used to convey disbelief (e.g., You must be kidding) or feeling abashed (e.g., as if caught in the act of lying).",
+            "🥴":"WOOZY FACE : A yellow face with a crumpled mouth and a cockeyed expression, as if tired and emotional from inebriation or smitten with love. Depicted with raised or furrowed eyebrows and at least one eye half-open. WhatsApp's design features a tongue hanging out. Meaning widely varies, but commonly conveys intoxication or infatuation. Its dazed expression may also represent such feelings or states as bewilderment, irritation, disgust, exhaustion, wackiness, or complete satisfaction.",
+            "🖖":"VULCAN SALUTE",
+            "🤟":"LOVE-YOU GESTURE: The gesture for “I love you” in American Sign Language, shown as a raised pinky (little) finger, index finger, and an extended thumb.",
+            "🙌":"RAISING HANDS: Two hands raised in the air, celebrating success or another joyous event.",
+            "❤️":"RED HEART: A classic love heart emoji, used for expressions of love. Displayed in various shades of red on most platforms. A similar emoji exists for the heart suit in a deck of playing cards."
+
+
+         }
+        const emojis=Object.keys(emojiDictionary)
+        const App = (props)=>{
+        const [meaning, setMeaning]=useState("")
+
+        function emojiInputHandler(event){
+            let userInput=event.target.value 
+            let meaning=emojiDictionary[userInput]
+            if(meaning==undefined){
+                meaning="We do not have this emoji in our Dictionary"
+            }
+            setMeaning(meaning)
+        }
+
+        function emojiClickHandler(emoji){
+            let meaning=emojiDictionary[emoji]
+            setMeaning(meaning)
+        }
+        return(
+            <div>
+            <h1>The Emoji Meanings You Should Know</h1>
+            <input onChange={emojiInputHandler}/>
+            <h2>{meaning}</h2>
+            <h3>Emojis We Have in our Dictionary. You can click on the emoticons to check it's Meaning.</h3>
+            {emojis.map(function(emoji){
+                return <span key={emoji} onClick={()=>emojiClickHandler(emoji)}>{emoji}</span>
+            })}
+
+            </div>
+        )
+        }
+        
+        ReactDOM.render(<App/>,rootHandle)
+
+        </script>
+    </body>
+</html>
